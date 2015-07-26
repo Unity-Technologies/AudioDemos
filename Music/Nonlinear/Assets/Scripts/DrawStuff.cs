@@ -3,29 +3,6 @@ using System.Collections;
 
 public class DrawStuff
 {
-    private static Material _mat;
-
-    public static Material mat
-    {
-        get
-        {
-            if (_mat == null)
-            {
-                _mat = new Material(
-                        "Shader \"Lines/Colored Blended\" {" +
-                        "SubShader { Pass { " +
-                        "    Blend SrcAlpha OneMinusSrcAlpha " +
-                        "    ZWrite Off Cull Off Fog { Mode Off } " +
-                        "    BindChannels {" +
-                        "      Bind \"vertex\", vertex Bind \"color\", color }" +
-                        "} } }");
-                _mat.hideFlags = HideFlags.HideAndDontSave;
-                _mat.shader.hideFlags = HideFlags.HideAndDontSave;
-            }
-            return _mat;
-        }
-    }
-
     public static void DrawLine(Vector3 p1, Vector3 p2, Color col)
     {
         GL.Begin(GL.LINES);

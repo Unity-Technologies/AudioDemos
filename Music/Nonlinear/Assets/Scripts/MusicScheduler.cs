@@ -171,6 +171,7 @@ public class MusicScheduler : MonoBehaviour
     public Camera camera;
     public AudioMixerGroup stingerMixerGroup;
     public float stingerLevel = 1.0f;
+	public Material mat;
 
     MusicLayer[] layers = new MusicLayer[16];
     System.Random random = new System.Random();
@@ -294,7 +295,7 @@ public class MusicScheduler : MonoBehaviour
 
     void OnRenderObject()
     {
-        DrawStuff.mat.SetPass(0);
+        mat.SetPass(0);
         for (int n = 0; n < layers.Length; n++)
             layers[n].DrawDebug();
     }
