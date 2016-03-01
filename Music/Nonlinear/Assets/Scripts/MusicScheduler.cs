@@ -171,8 +171,8 @@ public class MusicScheduler : MonoBehaviour
     public Camera camera;
     public AudioMixerGroup stingerMixerGroup;
     public float stingerLevel = 1.0f;
-	public Material mat;
 
+	Material mat;
     MusicLayer[] layers = new MusicLayer[16];
     System.Random random = new System.Random();
     AudioSource stingerSource;
@@ -197,6 +197,8 @@ public class MusicScheduler : MonoBehaviour
 
     void Start()
     {
+		mat = new Material(Shader.Find("Sprites/Default"));
+
         var root = new GameObject();
         root.transform.parent = gameObject.transform;
         root.name = "Music Layers";
