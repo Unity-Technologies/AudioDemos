@@ -4,6 +4,7 @@ using System.Collections;
 
 public class MusicController : MonoBehaviour
 {
+    public AudioMixer mixer;
     public AudioSource drivingSource;
     public AudioMixerSnapshot[] snapshots;
     public int[] segmentRepeats;
@@ -13,6 +14,7 @@ public class MusicController : MonoBehaviour
     private int currSnapshot = 0;
     private int segmentCounter = 0;
     private bool showGUI = false;
+    private float playbackSpeed = 1.0f;
 
     void Start()
     {
@@ -39,6 +41,18 @@ public class MusicController : MonoBehaviour
 
         if (showGUI)
         {
+            GUILayout.BeginHorizontal();
+                GUILayout.Label (string.Format("Speed={0:00}%", playbackSpeed * 100));
+                float newPlaybackSpeed = GUILayout.HorizontalSlider (playbackSpeed, 0.5f, 2.0f);
+                if (newPlaybackSpeed != playbackSpeed)
+                {
+                    playbackSpeed = newPlaybackSpeed;
+                    mixer.SetFloat ("MasterPlaybackSpeed", playbackSpeed);
+                    mixer.SetFloat ("MasterPitchShift", 1.0f / playbackSpeed);
+                    mixer.SetFloat ("EchoDelayTime", 237.0f / playbackSpeed);
+                }
+            GUILayout.EndHorizontal();
+
             int index = 0;
             foreach (var s in snapshots)
             {
